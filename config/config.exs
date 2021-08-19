@@ -10,6 +10,9 @@ use Mix.Config
 config :remote,
   ecto_repos: [Remote.Repo]
 
+config :remote, Remote.Repo,
+  migration_timestamps: [type: :utc_datetime_usec]
+
 # Configures the endpoint
 config :remote, RemoteWeb.Endpoint,
   url: [host: "localhost"],

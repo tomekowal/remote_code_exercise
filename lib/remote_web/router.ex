@@ -14,7 +14,7 @@ defmodule RemoteWeb.Router do
   end
 
   scope "/", RemoteWeb do
-    pipe_through :browser
+    pipe_through :api
     get "/", UserController, :index
   end
 

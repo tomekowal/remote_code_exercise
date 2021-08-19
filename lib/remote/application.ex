@@ -10,7 +10,7 @@ defmodule Remote.Application do
       # Start the Ecto repository
       Remote.Repo,
       # Start custom GenServer,
-      {Remote.Users.GenServer, name: Remote.Users.GenServer},
+      {Remote.Users.GenServer, gen_server_opts()},
       # Start the Telemetry supervisor
       RemoteWeb.Telemetry,
       # Start the PubSub system
@@ -25,6 +25,12 @@ defmodule Remote.Application do
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Remote.Supervisor]
     Supervisor.start_link(children, opts)
+  end
+
+  if Mix.env == :test do
+    defp gen_server_opts, do: [name: Remote.Users.GenServer, max_number: 50, last_query_time: nil]
+  else
+    defp gen_server_opts, do: [name: Remote.Users.GenServer]
   end
 
   # Tell Phoenix to update the endpoint configuration

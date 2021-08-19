@@ -8,8 +8,8 @@ defmodule Remote.Users.GenServer do
 
   # Client API
   def start_link(opts) do
-    max_number = integer_from_zero_to_n_inclusive(100)
-    last_query_time = nil
+    max_number = Keyword.get(opts, :max_number) || integer_from_zero_to_n_inclusive(100)
+    last_query_time = Keyword.get(opts, :last_query_time) || nil
     GenServer.start_link(__MODULE__, {max_number, last_query_time}, opts)
   end
 
