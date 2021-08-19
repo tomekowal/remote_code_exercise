@@ -20,6 +20,7 @@ defmodule Remote.Users.GenServer do
   # Callbacks
   @impl true
   def init(initial_state) do
+    send(self(), :tick)
     # this is the only timer in the project so it is not worth to use `send_after`
     :timer.send_interval(@one_minut_in_ms, :tick)
     {:ok, initial_state}
