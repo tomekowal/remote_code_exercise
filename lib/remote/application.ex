@@ -9,6 +9,8 @@ defmodule Remote.Application do
     children = [
       # Start the Ecto repository
       Remote.Repo,
+      # Start custom GenServer,
+      {Remote.Users.GenServer, name: Remote.Users.GenServer},
       # Start the Telemetry supervisor
       RemoteWeb.Telemetry,
       # Start the PubSub system
@@ -16,7 +18,7 @@ defmodule Remote.Application do
       # Start the Endpoint (http/https)
       RemoteWeb.Endpoint
       # Start a worker by calling: Remote.Worker.start_link(arg)
-      # {Remote.Worker, arg}
+      # {Remote.Worker, arg},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
